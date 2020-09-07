@@ -34,24 +34,13 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onPrepared(MediaPlayer mp) {mediaPlayer.start();}
         });
-        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-            @Override
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {}
-        });
-        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {return false;}
-        });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {}
-        });
+
         //播放音乐
         try {
             mCacheServerProxy.registerCacheListener(mCacheListener, URL);
             localUrl = mCacheServerProxy.getProxyUrl(URL);
             mediaPlayer.setDataSource(localUrl);
-            mediaPlayer.prepareAsync();
+            mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
